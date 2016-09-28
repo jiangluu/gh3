@@ -9,21 +9,24 @@
 
 	<ul></ul>
 
-  <script src="../vendors/jquery-2.1.0.min.js"></script>
+  <script src="../vendors/zepto.min.js"></script>
   <script src="../vendors/underscore-min.js"></script>
   <script src="../gh3.js"></script>
   <script>
     var repositories = $("ul");
-    Gh3.Repositories.search("pdf", {start_page : 1}, function (err, res) {
+    Gh3.Search.repos("lua", {start_page : 1, per_page:10}, function (err, res) {
       if(err) { throw "outch ..." }
+	  //console.log(res)
+	  
+	  res.forEach( function(x){
+		//console.log(x)
+		console.log(x.description)
+		repositories.append(
+			$('<li>').append(x.full_name+" : "+x.description) )
+	  })
 
       //console.log(Gh3.Repositories.getAll());
-      Gh3.Repositories.each(function (repository) {
-        console.log(repository.name, repository.username, repository.description, repository)
-        repositories.append(
-          $('<li>').append(repository.name+" : "+repository.description)
-        );
-      });
+      
     });
 
   </script>

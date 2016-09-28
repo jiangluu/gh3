@@ -1119,9 +1119,9 @@
 								 });
 		},
 		_template : function (params, pagesInfo, callback, service, createObj) {
-			var data = $.extend({}, params, pagesInfo);
 			Gh3.Helper.callHttpApi({
-				service : service + '?' + decodeURIComponent($.param(data)),
+				service : service + '?q=' + params,
+				data : pagesInfo,
 				success : function(res, text, jq) {
 					var items = [];
 					if (createObj) {
